@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import Joke from './Joke';
 
 export default class Jokes extends Component {
     constructor(props) {
@@ -45,13 +46,22 @@ export default class Jokes extends Component {
         }
     }
 
+    revealPunchline = event => {
+        event.preventDefault();
+        event.target.nextSibling.classList.toggle('punchline')
+    }
+
 
     render() { 
         if (this.state.jokes) {
             return (
-                <div>
-                    {this.state.jokes.map(joke => <p key={joke.id}>{joke.setup}</p>)}
-                </div>
+                <>
+                    <h1>Enjoy some dad jokes!</h1>
+                    <h5>Click on a joke to reveal the punchline.</h5>
+                    <div className='jokes'>
+                        {this.state.jokes.map(joke => <Joke key={joke.id} joke={joke} reveal={this.revealPunchline} />)}
+                    </div>
+                </>
             )
         } else {
             return (
