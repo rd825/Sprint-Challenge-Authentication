@@ -14,6 +14,7 @@ server.use(express.json());
 server.use(cors());
 
 configureRoutes(server);
+server.get('/', (req, res) => res.send({API: 'live'}));
 
 module.exports = {
   server,
